@@ -24,6 +24,7 @@ int main(void)
 		{
 			if (feof(stdin))
 			{
+				write(1, "\n", 2);
 				break;
 			}
 			perror("Error al leer la entrada");
