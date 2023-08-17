@@ -18,13 +18,12 @@ int main(void)
 
 	while (1)
 	{
-		write(1, "($)", 4);
+		write(1, "$", 4);
 		read = getline(&input, &len, stdin);
 		if (read == -1)
 		{
 			if (feof(stdin))
 			{
-				write(1, "\n", 2);
 				break;
 			}
 			perror("Error al leer la entrada");
