@@ -18,6 +18,8 @@ int main(void)
 
 	while (1)
 	{
+		if (isatty(STDIN_FILENO))
+			write(1,"($)", 3);
 		read = getline(&input, &len, stdin);
 		if (read == -1)
 		{
