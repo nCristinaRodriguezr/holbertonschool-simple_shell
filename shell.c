@@ -17,7 +17,7 @@ void exec_token(char *input)
 	char *token = strtok(input, " ");
 	int i = 0;
 
-	while (token != NULL && token != " ")
+	while (token != NULL && strcmp(token, " ") != 0)
 	{
 		args[i] = token;
 		token = strtok(NULL, " ");
