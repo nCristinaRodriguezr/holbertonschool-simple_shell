@@ -17,14 +17,14 @@ void exec_token(char *input)
 	char *token = strtok(input, " ");
 	int i = 0;
 
-	while (token != NULL && strcmp(token, " ") != 0)
+	while (token != NULL)
 	{
 		args[i] = token;
 		token = strtok(NULL, " ");
 		i++;
 	}
 	args[i] = NULL;
-	if (args[0] != NULL && strcmp(args[0], " ") != 0)
+	if (args[0] != NULL)
 	{
 		execve(args[0], args, NULL);
 	}
