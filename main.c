@@ -30,12 +30,10 @@ int main(void)
 		if (pid < 0)
 		{
 			perror("Error al crear el proceso hijo");
-			exit(1);
 		}
 		else if (pid == 0)
 		{
 			exec_token(input);
-			exit(1);
 		}
 		else
 		{
