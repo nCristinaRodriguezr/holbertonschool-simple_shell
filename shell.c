@@ -53,5 +53,5 @@ void strtrim(char *input)
 	}
 	memmove(input, input + i, strlen(input) - i + 1);
 	i = strlen(input) - 1;
-	input[i - 1] = '\0';
+	input[i] = '\0';
 }
