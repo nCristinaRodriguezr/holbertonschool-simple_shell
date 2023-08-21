@@ -25,9 +25,6 @@ int main(void)
 		{
 			if (feof(stdin))
 				break;
-			perror("Error al leer la entrada");
-			free(input);
-			exit(1);
 		}
 		input[read - 1] = '\0';
 		pid = fork();
