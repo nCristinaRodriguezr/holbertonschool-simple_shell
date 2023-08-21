@@ -26,7 +26,7 @@ void exec_token(char *input)
 	args[i] = NULL;
 	if (args[0] != NULL)
 	{
-		execvp(args[0], args);
+		execve(args[0], args, NULL);
 	}
 	else
 	{
