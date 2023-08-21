@@ -46,7 +46,7 @@ int main(void)
 		{
 			waitpid(pid, NULL, 0);
 		}
-		free(input);
 	}
+	free(input);
 	return (0);
 }
