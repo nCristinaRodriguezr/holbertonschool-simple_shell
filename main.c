@@ -23,7 +23,11 @@ int main(void)
 		read = getline(&input, &len, stdin);
 		if (read == -1)
 		{
-			break;
+			if (feof(stdin))
+				break;
+			perror("Error al leer la entrada");
+			free(input);
+			exit(1);
 		}
 		input[read - 1] = '\0';
 		pid = fork();
@@ -36,7 +40,6 @@ int main(void)
 		else if (pid == 0)
 		{
 			exec_token(input);
-			free(input);
 			exit(1);
 		}
 		else
