@@ -23,7 +23,6 @@ int main(void)
 		read = getline(&input, &len, stdin);
 		if (read == -1)
 		{
-			if (feof(stdin))
 				break;
 		}
 		input[read - 1] = '\0';
