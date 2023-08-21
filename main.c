@@ -19,24 +19,17 @@ int main(void)
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
-			write(1,"($)", 3);
+			write(1, "($)", 3);
 		read = getline(&input, &len, stdin);
 		if (read == -1)
 		{
-			if (feof(stdin))
-			{
-				break;
-			}
-			perror("Error al leer la entrada");
-			free(input);
-			exit(1);
+			break;
 		}
 		input[read - 1] = '\0';
 		pid = fork();
 		if (pid < 0)
 		{
 			perror("Error al crear el proceso hijo");
-			free(input);
 			exit(1);
 		}
 		else if (pid == 0)
@@ -48,7 +41,7 @@ int main(void)
 		{
 			waitpid(pid, NULL, 0);
 		}
+		free(input);
 	}
-	free(input);
 	return (0);
 }

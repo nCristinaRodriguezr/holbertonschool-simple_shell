@@ -24,6 +24,12 @@ void exec_token(char *input)
 		i++;
 	}
 	args[i] = NULL;
-	execvp(args[0], args);
-	perror("Error al ejecutar el comando");
+	if (args[0] != NULL)
+	{
+		execvp(args[0], args);
+	}
+	else
+	{
+		perror("Error al ejecutar el comando");
+	}
 }
