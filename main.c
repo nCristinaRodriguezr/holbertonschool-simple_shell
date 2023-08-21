@@ -23,14 +23,13 @@ int main(void)
 		read = getline(&input, &len, stdin);
 		if (read == -1)
 		{
-				break;
+			break;
 		}
 		input[read - 1] = '\0';
 		pid = fork();
 		if (pid < 0)
 		{
 			perror("Error al crear el proceso hijo");
-			free(input);
 			exit(1);
 		}
 		else if (pid == 0)
