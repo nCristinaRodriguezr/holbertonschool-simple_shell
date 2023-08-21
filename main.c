@@ -25,8 +25,8 @@ int main(void)
 		{
 			break;
 		}
-		input[read - 1] = '\0';
 		strtrim(input);
+		input[read - 1] = '\0';
 		pid = fork();
 		if (pid < 0)
 		{
