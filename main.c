@@ -36,6 +36,7 @@ int main(void)
 		else if (pid == 0)
 		{
 			exec_token(input);
+			free(input);
 			exit(1);
 		}
 		else
