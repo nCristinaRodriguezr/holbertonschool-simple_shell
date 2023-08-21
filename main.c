@@ -43,6 +43,5 @@ int main(void)
 		}
 		free(input);
 	}
-	free(input);
 	return (0);
 }
