@@ -33,3 +33,23 @@ void exec_token(char *input)
 		perror("Error al ejecutar el comando");
 	}
 }
+/**
+ * strtrim- Esta funcion quita los espacios atras y adelante
+ * de un string
+ * @input: Entrada del usuario
+ */
+void strtrim(char *input)
+{
+	int i = strlen(input) - 1;
+	while (i >= 0 && input[i] == ' ')
+	{
+		input[i] = '\0';
+		i--;
+	}
+	i = 0;
+	while (input[i] && input[i] == ' ')
+	{
+		i++;
+	}
+	memmove(input, input + i, strlen(input) - i + 1);
+}
