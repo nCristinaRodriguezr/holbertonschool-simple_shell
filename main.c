@@ -24,7 +24,6 @@ int main(void)
 		if (read == -1)
 			break;
 		strtrim(input);
-		input[read - 1] = '\0';
 		pid = fork();
 		if (pid < 0)
 			perror("Error al crear el proceso hijo");

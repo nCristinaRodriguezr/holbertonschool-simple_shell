@@ -38,7 +38,7 @@ void strtrim(char *input)
 		i--;
 	}
 	i = 0;
-	while (input[i] && input[i] == ' ')
+	while (input[i] && (input[i] == ' ' || input[i] == '\n'))
 	{
 		i++;
 	}
