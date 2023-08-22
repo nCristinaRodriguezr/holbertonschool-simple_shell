@@ -29,10 +29,9 @@ int main(void)
 		if (pid < 0)
 			perror("Error al crear el proceso hijo");
 		else if (pid == 0)
-			exec_token(miniInput);
+			exec_token(input);
 		else
 			waitpid(pid, NULL, 0);
-		i++;
 	}	
 	free(input);
 	return (0);
