@@ -30,7 +30,7 @@ int main(void)
 		tokenizeInput(input, comands, "\n");
 		while (comands[i] != NULL)
 		{
-			miniInput = *comands[i];
+			miniInput = comands[i];
 			strtrim(miniInput);
 			miniInput[read - 1] = '\0';
 			pid = fork();
