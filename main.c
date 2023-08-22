@@ -17,6 +17,7 @@ int main(void)
 	ssize_t read;
 	char *comands[MAX_INPUT_SIZE];
 	char *miniInput = NULL;
+	int i = 0;
 	pid_t pid;
 
 	while (1)
