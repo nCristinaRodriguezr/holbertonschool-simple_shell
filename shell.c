@@ -32,13 +32,13 @@ void exec_token(char *input)
 void strtrim(char *input)
 {
 	int i = strlen(input) - 1;
-	while (i >= 0 && (input[i] == ' ' || input[i] == '\n'))
+	while (i >= 0 && (input[i] == ' ' || input[i] == '\n' || input[i] == '\0'))
 	{
 		input[i] = '\0';
 		i--;
 	}
 	i = 0;
-	while (input[i] && (input[i] == ' ' || input[i] == '\n'))
+	while (input[i] && (input[i] == ' ' || input[i] == '\n' || input[i] == '\0'))
 	{
 		i++;
 	}
