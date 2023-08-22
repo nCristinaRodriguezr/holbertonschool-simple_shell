@@ -15,6 +15,7 @@ int main(void)
 	size_t len = 0;
 	ssize_t read;
 	pid_t pid;
+	int len_input = 0;
 
 	while (1)
 	{
@@ -24,10 +25,11 @@ int main(void)
 		if (read == -1)
 			break;
 		strtrim(input);
+		len_input = strlen(input);
 		pid = fork();
 		if (pid < 0)
 			perror("Error al crear el proceso hijo");
-		else if (pid == 0)
+		else if (pid == 0 && len_input > 0)
 			exec_token(input);
 		else
 			waitpid(pid, NULL, 0);
