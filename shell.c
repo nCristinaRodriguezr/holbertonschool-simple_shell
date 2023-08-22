@@ -14,17 +14,8 @@
 void exec_token(char *input)
 {
 	char *args[MAX_INPUT_SIZE];
-	char *token = strtok(input, " ");
-	int i = 0;
-
-	while (token != NULL)
-	{
-		args[i] = token;
-		token = strtok(NULL, " ");
-		i++;
-	}
-	args[i] = NULL;
-	if (args[0] != NULL && strcmp(args[0], "\n") != 0)
+	tokenizeInput(input, args, " ");
+	if (args[0] != NULL)
 	{
 		execve(args[0], args, NULL);
 	}
@@ -52,4 +43,23 @@ void strtrim(char *input)
 		i++;
 	}
 	memmove(input, input + i, strlen(input) - i + 1);
+}
+/**
+ * tokenizeInput - Divide una cadena de entrada en tokens y los almacena en un arreglo.
+ * @input: Cadena de entrada que se va a dividir en tokens.
+ * @args: Arreglo de punteros a caracteres donde se almacenarán los tokens.
+ * @delimiter: es el delimitador que se usara como guia para
+ * separar los comandos
+ */
+void tokenizeInput(char *input, char **args, char *delimiter)
+{
+	char *token = strtok(input, delimiter);
+	int i = 0;
+	while (token != NULL)
+	{
+		args[i] = token;
+		token = strtok(NULL, delimiter);
+		i++;
+	}
+	args[i] = NULL;
 }
