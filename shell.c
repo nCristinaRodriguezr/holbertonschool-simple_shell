@@ -24,7 +24,7 @@ void exec_token(char *input)
 		i++;
 	}
 	args[i] = NULL;
-	if (args[0] != NULL)
+	if (args[0] != NULL && strcmp(args[0], "\n") != 0)
 	{
 		execve(args[0], args, NULL);
 	}
