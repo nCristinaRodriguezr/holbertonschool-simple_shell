@@ -33,7 +33,7 @@ int main(void)
 			exec_token(input);
 		else
 			waitpid(pid, NULL, 0);
-	}	
+	}
 	free(input);
 	return (0);
 }
