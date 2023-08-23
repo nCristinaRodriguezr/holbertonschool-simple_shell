@@ -67,3 +67,22 @@ void tokenizeInput(char *input, char **args, char *delimiter)
 	}
 	args[i] = NULL;
 }
+/**
+ * get_full_path - Construct the full path for a command
+ * @command: The command entered by the user
+ * Return: A dynamically allocated string containing the full path,
+ * or NULL if memory allocation fails
+ */
+char *get_full_path(const char *command)
+{
+	char *path = "/bin/";
+	char *full_path = malloc(strlen(path) + strlen(command) + 1);
+
+	if (full_path)
+	{
+		strcpy(full_path, path);
+		strcat(full_path, command);
+	}
+	free(full_path);
+	return (full_path);
+}
