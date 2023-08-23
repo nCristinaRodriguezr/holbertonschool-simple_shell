@@ -6,6 +6,7 @@
 #include <string.h>
 #include "main.h"
 #define MAX_INPUT_SIZE 1024
+#define MAX_PATH_LENGTH 4096
 /**
  * exec_token- esta función tokeniza una entrada de usuario y
  * ejecuta el comando
@@ -17,13 +18,25 @@ void exec_token(char *input)
 
 	tokenizeInput(input, args, " ");
 	if (args[0] != NULL)
-	{
-		execve(args[0], args, NULL);
-	}
-	else
-	{
-		perror("Error al ejecutar el comando");
-	}
+	{		
+		char *command_path = full_path(args[0]);
+			            
+		if (command_path != NULL) 
+		{
+			pid_t child_pid = fork();
+			if (child_pid == 0) 
+				execve(command_path, args, NULL);
+				perror("Error al ejecutar el comando");
+				exit(1);
+			else if (child_pid > 0)
+				int status;
+				waitpid(child_pid, &status, 0);
+			else 
+				perror("Error al crear el proceso hijo");
+			else
+				fprintf(stderr, "Comando no encontrado: %s\n", args[0]);
+		}
+	}	
 }
 /**
  * strtrim- Esta funcion quita los espacios atras y adelante
@@ -73,16 +86,33 @@ void tokenizeInput(char *input, char **args, char *delimiter)
  * Return: A dynamically allocated string containing the full path,
  * or NULL if memory allocation fails
  */
-char *get_full_path(const char *command)
+char *full_path(char *file)
 {
-	char *path = "/bin/";
-	char *full_path = malloc(strlen(path) + strlen(command) + 1);
-
-	if (full_path)
-	{
-		strcpy(full_path, path);
-		strcat(full_path, command);
+	char *path_env = getenv("PATH");
+	if (path_env == NULL)
+       	{
+		fprintf(stderr, "Variable de entorno PATH no definida.\n");
+		return (NULL);
 	}
-	free(full_path);
-	return (full_path);
+	char *path = strdup(path_env);
+	if (path == NULL)
+	{
+		perror("Error al duplicar el valor de PATH");
+		return (NULL);
+	}
+	char *token = strtok(path, ":");
+	while (token != NULL)
+	{
+		char full[MAX_PATH_LENGTH];
+		snprintf(full, sizeof(full), "%s/%s", token, file);
+		struct stat st;
+		if (stat(full, &st) == 0 && S_ISREG(st.st_mode) && (st.st_mode & S_IXUSR))
+		{
+			free(path);
+			return strdup(full);
+		}
+		token = strtok(NULL, ":");
+	}
+	free(path); 
+	return (NULL);
 }
