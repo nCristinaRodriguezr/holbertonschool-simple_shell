@@ -16,8 +16,7 @@ int main(void)
 	ssize_t read;
 	pid_t pid;
 	int len_input = 0;
-	char *full_path;
-
+	
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
@@ -28,12 +27,12 @@ int main(void)
 		strtrim(input);
 		len_input = strlen(input);
 		pid = fork();
-			if (pid < 0)
-				perror("Error al crear el proceso hijo");
-			else if (pid == 0 && len_input > 0)
-				exec_token(input);
-			else
-				waitpid(pid, NULL, 0);
+		if (pid < 0)
+			perror("Error al crear el proceso hijo");
+		else if (pid == 0 && len_input > 0)
+			exec_token(input);
+		else
+			waitpid(pid, NULL, 0);
 	}
 	free(input);
 	return (0);
