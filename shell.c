@@ -68,3 +68,23 @@ void tokenizeInput(char *input, char **args, char *delimiter)
 	}
 	args[i] = NULL;
 }
+/**
+  * builtin_env - Print the environment variables.
+  *
+  * Description: This function prints the current environment variables.
+  * It uses the global variable 'environ' to access the environment data.
+  *
+  * Return: void
+  */
+void builtin_env(void)
+{
+	int i;
+
+	if (environ)
+	{
+		for (i = 0; environ[i]; i++)
+		{
+			printf("%s\n", environ[i]);
+		}
+	}
+}	
