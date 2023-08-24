@@ -41,7 +41,7 @@ int main(void)
 			else
 				flag_exec = get_full_path(args[0], full_path);
 		}
-		if (flag_exec == 1)
+		if (flag_exec == 1 && access(full_path, X_OK) == 0)
 		{
 			pid = fork();
 			if (pid < 0)
