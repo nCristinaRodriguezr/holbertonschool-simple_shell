@@ -32,7 +32,7 @@ int main(void)
 		if (len_input > 0)
 		{
 			tokenizeInput(input, args, " ");
-			if (input[0] == '/')
+			if (input[0] == '/' || input[0] == '.')
 				full_path = args[0];
 			else
 				full_path = get_full_path(args[0]);
