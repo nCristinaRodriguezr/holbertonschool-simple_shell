@@ -5,17 +5,13 @@
 #include <sys/wait.h>
 #include <string.h>
 #include "main.h"
-#define MAX_INPUT_SIZE 1024
 /**
   * exec_token- esta función tokeniza una entrada de usuario y
   * ejecuta el comando
   * @input: Entrada del usuario
   */
-void exec_token(char *input)
+void exec_token(char *input, char **args)
 {
-	char *args[MAX_INPUT_SIZE];
-
-	tokenizeInput(input, args, " ");
 	if (args[0] != NULL)
 	{
 		execve(args[0], args, NULL);
