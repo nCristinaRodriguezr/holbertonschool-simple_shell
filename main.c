@@ -16,7 +16,7 @@ int main(void)
 	ssize_t read;
 	pid_t pid;
 	int len_input = 0;
-	
+
 	while (1)
 	{
 		if (isatty(STDIN_FILENO))
@@ -36,4 +36,4 @@ int main(void)
 	}
 	free(input);
 	return (0);
-i}
+}
