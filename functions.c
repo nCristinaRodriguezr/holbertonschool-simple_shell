@@ -75,6 +75,5 @@ int get_full_path(const char *command, char *full_path)
 		}
 		auxpath = strtok(NULL, ":");
 	}
-	perror("Error PATH No ejecutable");
 	return (0);
 }
