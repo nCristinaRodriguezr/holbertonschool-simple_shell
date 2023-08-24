@@ -8,13 +8,14 @@
 /**
   * exec_token- esta función tokeniza una entrada de usuario y
   * ejecuta el comando
-  * @input: Entrada del usuario
+  * @args: argumentos del comando
+  * @path: Ruta al archivo para ejecutar el comando
   */
-void exec_token(char **args)
+void exec_token(char **args, char *path)
 {
 	if (args[0] != NULL)
 	{
-		execve(args[0], args, NULL);
+		execve(path, args, NULL);
 	}
 	else
 	{
@@ -62,4 +63,22 @@ void tokenizeInput(char *input, char **args, char *delimiter)
 		i++;
 	}
 	args[i] = NULL;
+}
+/**
+ * get_full_path - Construct the full path for a command
+ * @command: The command entered by the user
+ * Return: A dynamically allocated string containing the full path,
+ * or NULL if memory allocation fails
+ */
+char *get_full_path(const char *command)
+{
+	char *path = "/bin/";
+	char *full_path = malloc(strlen(path) + strlen(command) + 1);
+
+	if (full_path)
+	{
+		strcpy(full_path, path);
+		strcat(full_path, command);
+	}
+	return (full_path);
 }

@@ -18,6 +18,7 @@ int main(void)
 	pid_t pid;
 	int len_input = 0;
 	char *args[MAX_INPUT_SIZE];
+	char *path = NULL;
 
 	while (1)
 	{
@@ -29,12 +30,18 @@ int main(void)
 		strtrim(input);
 		len_input = strlen(input);
 		if (len_input > 0)
+		{
 			tokenizeInput(input, args, " ");
+			if (input[0] == '/')
+				path = args[0];
+			else
+				path = get_full_path(args[0]);
+		}
 		pid = fork();
 		if (pid < 0)
 			perror("Error al crear el proceso hijo");
 		else if (pid == 0 && len_input > 0)
-			exec_token(args);
+			exec_token(args, path);
 		else
 			waitpid(pid, NULL, 0);
 	}

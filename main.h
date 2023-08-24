@@ -1,8 +1,8 @@
 #ifndef MAIN_H
 #define MAIN_H
 int main(void);
-void exec_token(char **args);
+void exec_token(char **args, char *path);
 void strtrim(char *input);
 void tokenizeInput(char *input, char **args, char *delimiter);
-void builtin_env(void);
+char *get_full_path(const char *command);
 #endif
