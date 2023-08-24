@@ -72,7 +72,7 @@ void tokenizeInput(char *input, char **args, char *delimiter)
  * Return: A dynamically allocated string containing the full path,
  * or NULL if memory allocation fails
  */
-void get_full_path(const char *command, char *full_path)
+int get_full_path(const char *command, char *full_path)
 {
 	char *path = getenv("PATH");
 	char *path_copy = strdup(path);
@@ -88,9 +88,10 @@ void get_full_path(const char *command, char *full_path)
 		snprintf(full_path, MAX_PATH_LENGTH, "%s/%s", auxpath, command);
 		if (access(full_path, X_OK) == 0)
 		{
-			return;
+			return (1);
 		}
 		auxpath = strtok(NULL, ":");
 	}
 	perror("Error PATH No ejecutable");
+	return (0);
 }

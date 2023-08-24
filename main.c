@@ -19,6 +19,7 @@ int main(void)
 	int len_input = 0;
 	char *args[MAX_INPUT_SIZE];
 	char *full_path = (char *)malloc(MAX_INPUT_SIZE * sizeof(char));
+	int flag_exec = 0;
 
 	while (1)
 	{
@@ -33,17 +34,24 @@ int main(void)
 		{
 			tokenizeInput(input, args, " ");
 			if (input[0] == '/' || input[0] == '.')
+			{
 				strcpy (full_path, args[0]);
+				flag_exec = 1;
+			}
 			else
-				get_full_path(args[0], full_path);
+				flag_exec = get_full_path(args[0], full_path);
 		}
-		pid = fork();
-		if (pid < 0)
-			perror("Error al crear el proceso hijo");
-		else if (pid == 0 && len_input > 0)
-			exec_token(args, full_path);
-		else
-			waitpid(pid, NULL, 0);
+		if (flag_exec == 1)
+		{
+			pid = fork();
+			if (pid < 0)
+				perror("Error al crear el proceso hijo");
+			else if (pid == 0 && len_input > 0)
+				exec_token(args, full_path);
+			else
+				waitpid(pid, NULL, 0);
+		}
+		flag_exec = 0;
 	}
 	free(full_path);
 	free(input);
