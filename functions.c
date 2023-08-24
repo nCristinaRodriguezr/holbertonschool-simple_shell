@@ -10,7 +10,7 @@
   * ejecuta el comando
   * @input: Entrada del usuario
   */
-void exec_token(char *input, char **args)
+void exec_token(char **args)
 {
 	if (args[0] != NULL)
 	{
