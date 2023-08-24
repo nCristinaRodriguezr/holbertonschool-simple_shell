@@ -47,7 +47,7 @@ int main(void)
 			if (pid < 0)
 				perror("Error al crear el proceso hijo");
 			else if (pid == 0 && len_input > 0)
-				exec_token(args, full_path);
+				execve(full_path, args, NULL);
 			else
 				waitpid(pid, NULL, 0);
 		}

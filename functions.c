@@ -7,23 +7,6 @@
 #include "main.h"
 #define MAX_PATH_LENGTH 1024
 /**
-  * exec_token- esta función tokeniza una entrada de usuario y
-  * ejecuta el comando
-  * @args: argumentos del comando
-  * @full_path: Ruta al archivo para ejecutar el comando
-  */
-void exec_token(char **args, char *full_path)
-{
-	if (args[0] != NULL)
-	{
-		execve(full_path, args, NULL);
-	}
-	else
-	{
-		perror("Error al ejecutar el comando");
-	}
-}
-/**
   * strtrim- Esta funcion quita los espacios atras y adelante
   * de un string
   * @input: Entrada del usuario
