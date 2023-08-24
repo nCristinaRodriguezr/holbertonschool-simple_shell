@@ -22,7 +22,7 @@ int main(void)
 		if (isatty(STDIN_FILENO))
 			write(1, "($)", 3);
 		read = getline(&input, &len, stdin);
-		if (read == -1)
+		if (read == -1 || strcmp(input, "exit") == 0)
 			break;
 		strtrim(input);
 		len_input = strlen(input);
@@ -36,4 +36,4 @@ int main(void)
 	}
 	free(input);
 	return (0);
-}
+i}
