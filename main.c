@@ -53,6 +53,7 @@ int main(void)
 		}
 		flag_exec = 0;
 	}
+	free(full_path);
 	free(input);
 	return (0);
 }
