@@ -44,6 +44,7 @@ int main(void)
 			exec_token(args, full_path);
 		else
 			waitpid(pid, NULL, 0);
+		free(full_path);
 	}
 	free(input);
 	return (0);
