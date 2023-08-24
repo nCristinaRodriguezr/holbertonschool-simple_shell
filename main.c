@@ -46,6 +46,5 @@ int main(void)
 			waitpid(pid, NULL, 0);
 	}
 	free(input);
-	free(full_path);
 	return (0);
 }
