@@ -4,5 +4,5 @@ int main(void);
 void exec_token(char **args, char *full_path);
 void strtrim(char *input);
 void tokenizeInput(char *input, char **args, char *delimiter);
-char *get_full_path(const char *command);
+void get_full_path(const char *command, char *full_path);
 #endif

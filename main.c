@@ -18,7 +18,7 @@ int main(void)
 	pid_t pid;
 	int len_input = 0;
 	char *args[MAX_INPUT_SIZE];
-	char *full_path = NULL;
+	char *full_path = (char *)malloc(MAX_INPUT_SIZE * sizeof(char));
 
 	while (1)
 	{
@@ -33,9 +33,9 @@ int main(void)
 		{
 			tokenizeInput(input, args, " ");
 			if (input[0] == '/' || input[0] == '.')
-				full_path = args[0];
+				strcpy (full_path, args[0]);
 			else
-				full_path = get_full_path(args[0]);
+				get_full_path(args[0], full_path);
 		}
 		pid = fork();
 		if (pid < 0)
@@ -45,6 +45,7 @@ int main(void)
 		else
 			waitpid(pid, NULL, 0);
 	}
+	free(full_path);
 	free(input);
 	return (0);
 }

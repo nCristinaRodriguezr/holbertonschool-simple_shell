@@ -5,6 +5,7 @@
 #include <sys/wait.h>
 #include <string.h>
 #include "main.h"
+#define MAX_PATH_LENGTH 1024
 /**
   * exec_token- esta función tokeniza una entrada de usuario y
   * ejecuta el comando
@@ -67,18 +68,29 @@ void tokenizeInput(char *input, char **args, char *delimiter)
 /**
  * get_full_path - Construct the full path for a command
  * @command: The command entered by the user
+ * @full_path: puntero donde se guardará la ruta completa
  * Return: A dynamically allocated string containing the full path,
  * or NULL if memory allocation fails
  */
-char *get_full_path(const char *command)
+void get_full_path(const char *command, char *full_path)
 {
-	char *path = "/bin/";
-	char *full_path = malloc(strlen(path) + strlen(command) + 1);
+	char *path = getenv("PATH");
+	char *path_copy = strdup(path);
+	char *auxpath = NULL;
 
-	if (full_path)
+	if (path_copy == NULL)
 	{
-		strcpy(full_path, path);
-		strcat(full_path, command);
+		perror("Error getting PATH");
 	}
-	return (full_path);
+	auxpath = strtok(path_copy, ":");
+	while (auxpath != NULL)
+	{
+		snprintf(full_path, MAX_PATH_LENGTH, "%s/%s", auxpath, command);
+		if (access(full_path, X_OK) == 0)
+		{
+			return;
+		}
+		auxpath = strtok(NULL, ":");
+	}
+	perror("Error PATH No ejecutable");
 }
