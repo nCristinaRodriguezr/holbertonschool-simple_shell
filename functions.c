@@ -9,13 +9,13 @@
   * exec_token- esta función tokeniza una entrada de usuario y
   * ejecuta el comando
   * @args: argumentos del comando
-  * @path: Ruta al archivo para ejecutar el comando
+  * @full_path: Ruta al archivo para ejecutar el comando
   */
-void exec_token(char **args, char *path)
+void exec_token(char **args, char *full_path)
 {
 	if (args[0] != NULL)
 	{
-		execve(path, args, NULL);
+		execve(full_path, args, NULL);
 	}
 	else
 	{
