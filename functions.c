@@ -113,7 +113,6 @@ int get_full_path(const char *command, char *full_path)
 		strcpy(full_path, command);
 		if (access(full_path, X_OK) == 0)
 		{
-			free(path_copy);
 			return (1);
 		}
 	}
@@ -121,7 +120,7 @@ int get_full_path(const char *command, char *full_path)
 	{
 		if (path == NULL)
 		{
-			perror("Error getting PATH");
+			fprintf(stderr, "./hsh: 1: %s: not found\n", command);
 			return (0);
 		}
 		path_copy = strdup(path);
