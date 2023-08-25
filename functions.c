@@ -127,6 +127,6 @@ int get_full_path(const char *command, char *full_path)
 		auxpath = strtok(NULL, ":");
 	}
 	free(path_copy);
-	perror(command);
+	fprintf(stderr, "./hsh: 1: %s: not found\n", command);
 	return (0);
 }
