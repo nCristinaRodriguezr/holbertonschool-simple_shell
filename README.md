@@ -14,20 +14,16 @@ The Simple Shell is a basic implementation of a command line interface in the C 
 
 **Command Line Interface:** The Simple Shell presents an intuitive user interface that allows users to enter commands and view execution results.
 
-**Command Execution:** Commands entered by the user are executed by using the execvp() function. This allows the execution of external programs and system commands.
+**Command Execution:** Commands entered by the user are executed by using the execve() function. This allows the execution of external programs and system commands.
 
 ## main.c
-The main.c file contains the simple shell source code, the file handles the main logic of the shell, including:
+The main function executes a while loop that iterates as long as exit_flag is true. Inside the loop:
 
-Input and Output: The code reads user input from the command line and displays a flag (($)) to indicate that it is waiting for a command.
+Check if the input is connected to a terminal (isatty(STDIN_FILENO)). If so, it displays a prompt in the format "($)".
 
-Main Loop: Implements a main loop that constantly waits for commands entered by the user.
+Call function execute_func() to execute functions related to command interpretation.
 
-Process Creation: Use fork() to create a new child process that will execute the commands entered.
-
-Command Execution: The child process executes the commands using the exec_token() function.
-
-Waiting for Child Processes: The parent process waits for the child process to finish executing the command using waitpid().
+The function execute_func() can modify the exit_flag to control whether the loop should continue or not.
 
 ## main.h
 
@@ -36,22 +32,29 @@ El archivo `main.h` contiene declaraciones de funciones que se utilizan en el pr
 **function prototypes:**
 
 int main(void);
-void exec_token(char **args, char *full_path);
+int execute_func(void);
 void strtrim(char *input);
 void tokenizeInput(char *input, char **args, char *delimiter);
-void get_full_path(const char *command, char *full_path);
+int get_full_path(const char *command, char *full_path);
+extern char **environ;
 
 ## functions.c
 
 The `functions.c` file contains implementations of the functions declared in `main.h`, which are used in the main program. Here's a brief summary of the file's contents:
 
-1.  **`exec_token`**: This function takes an array of arguments and a full path to a file, and it uses the `execve` function to execute the command represented by those arguments. If the command is not found, it displays an error message.
+-   **execute_func**: This function manages command execution. It reads user input using `getline`, processes it, and executes the specified command. It utilizes other functions like `strtrim`, `tokenizeInput`, and `get_full_path` to prepare and execute the command. It returns 1 if the execution is successful and `getline` doesn't fail, or 0 if `getline` fails.
     
-2.  **`strtrim`**: This function removes leading and trailing white spaces, newline characters, and null (`\0`) characters from an input string.
+-   **strtrim**: This function removes leading and trailing whitespace from an input string.
     
-3.  **`tokenizeInput`**: Divides an input string into tokens using a specified delimiter and stores the tokens in an array of pointers to characters.
+-   **tokenizeInput**: It divides an input string into tokens using a delimiter and stores them in an array of character pointers.
+    
+-   **get_full_path**: This function constructs the full path for a command entered by the user. It checks if the command is an absolute or relative path and searches system paths to find the executable path. It returns 1 if it finds the executable path and 0 if it doesn't.
 
 ## AUTHORS
 
 **Jesenia Bernal Mogollom** <6935@holbertonstudents.com>
 **Nataly Cristina Rodriguez Rojas** <6925@holbertonstudents.com>
+
+# Flowchar
+[flowchar simple shell](https://drive.google.com/file/d/1C3Qgq55CL5VPchin7JezLFs2MvH1TlOZ/view?usp=sharing)
+
