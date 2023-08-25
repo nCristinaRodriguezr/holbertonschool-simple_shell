@@ -59,5 +59,8 @@ The `functions.c` file contains implementations of the functions declared in `ma
  - **Jesenia Bernal Mogollom** <6935@holbertonstudents.com>
 
 # Flowchar
-[flowchar simple shell](https://drive.google.com/file/d/1C3Qgq55CL5VPchin7JezLFs2MvH1TlOZ/view?usp=sharing)
+
+ - [flowchar main.c](https://drive.google.com/file/d/1C3Qgq55CL5VPchin7JezLFs2MvH1TlOZ/view?usp=sharing)  
+ - [flowchar   excute_func](https://drive.google.com/file/d/12PrAzB-6j5j8WY8eus1dsO9ihfMhjali/view?usp=sharing)
+ - [flowchar    get_full_path](https://drive.google.com/file/d/1XNr2F_pV1cBOPDNz_PTLjqg3tseqScZx/view?usp=sharing)
 
