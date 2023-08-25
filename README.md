@@ -31,11 +31,13 @@ El archivo `main.h` contiene declaraciones de funciones que se utilizan en el pr
 
 **function prototypes:**
 
- - int main(void); int execute_func(void);
+ 
+ - int main(void); 
+ - int execute_func(void);
  - void strtrim(char *input);
  - void tokenizeInput(char *input, char **args, char *delimiter);
- -  int get_full_path(const char *command, char *full_path);
- -  extern char **environ;
+ - int get_full_path(const char *command, char *full_path);
+ - extern char **environ;
 
 
 ## functions.c
