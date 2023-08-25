@@ -52,6 +52,8 @@ int execute_func(void)
 		else
 			waitpid(pid, NULL, 0);
 	}
+	else
+		exit(127);
 	free(full_path);
 	free(input);
 	return (1);
