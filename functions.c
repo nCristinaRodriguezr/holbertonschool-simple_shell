@@ -119,7 +119,9 @@ int get_full_path(const char *command, char *full_path)
 	}
 	if (path_copy == NULL)
 	{
+		free(path_copy);
 		perror("Error getting PATH");
+		return (0);
 	}
 	auxpath = strtok(path_copy, ":");
 	while (auxpath != NULL)
