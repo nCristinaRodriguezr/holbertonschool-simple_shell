@@ -6,8 +6,8 @@
 #include <string.h>
 #include "main.h"
 /**
- * main- esta función interpreta el comando el usuario
- * Return:Devuelve cero
+ * main- this function interprets the command the user
+ * Return: returns zero
  */
 int main(void)
 {

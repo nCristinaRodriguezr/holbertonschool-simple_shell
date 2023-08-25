@@ -8,8 +8,8 @@
 #define MAX_PATH_LENGTH 1024
 #define MAX_INPUT_SIZE 1024
 /**
-  * execute_func- Esta funcion maneja toda la ejecucion del comando
-  * Return: Devuelve cero si getline falla
+  * execute_func- This function handles all the execution of the command
+  * Return: Returns zero if getline fails
   */
 int execute_func(void)
 {
@@ -54,9 +54,9 @@ int execute_func(void)
 	return (1);
 }
 /**
-  * strtrim- Esta funcion quita los espacios atras y adelante
-  * de un string
-  * @input: Entrada del usuario
+  * strtrim- This function removes trailing and trailing spaces.
+  * of string
+  * @input: user input
   */
 void strtrim(char *input)
 {
@@ -75,12 +75,11 @@ void strtrim(char *input)
 	memmove(input, input + i, strlen(input) - i + 1);
 }
 /**
-  * tokenizeInput - Divide una cadena de entrada en tokens
-  * y los almacena en un arreglo.
-  * @input: Cadena de entrada que se va a dividir en tokens.
-  * @args: Arreglo de punteros a caracteres donde se almacenarán los tokens.
-  * @delimiter: es el delimitador que se usara como guia para
-  * separar los comandos
+  * tokenizeInput - Split an input string into tokens
+  * @input: Input string to be split into tokens.
+  * @args: Array of pointers to characters where tokens will be stored.
+  * @delimiter: is the delimiter that will be used as a guide for
+  * separate commands
   */
 void tokenizeInput(char *input, char **args, char *delimiter)
 {
