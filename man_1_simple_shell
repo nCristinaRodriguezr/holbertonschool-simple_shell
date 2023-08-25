@@ -1,15 +1,25 @@
 .TH SIMPLE_SHELL 1 "August 25, 2023" "Version 1.0" "Simple Shell User Manual"
+
 .SH NAME
+
 simple_shell \- Custom command-line interface
+
 .SH SINOPSIS
-     hsh [options] [command_file [argument ...]]
-     hsh -c [options] command_string [command_name [argument ...]]
-     hsh -s [options] [argument ...]
+
+hsh [options] [command_file [argument ...]]
+hsh -c [options] command_string [command_name [argument ...]]
+hsh -s [options] [argument ...]
+
 .SH SYNOPSIS FOR INTERACTIVE MODE
+
 Type ./hsh to show prompt. Command synopsis: [command] [options]
+
 .SH SYNOPSIS NON INTERACTIVE
+
 echo "[command] [options]" | ./hsh
+
 .SH DESCRIPTION
+
 The \fBsimple_shell\fR command is a custom command-line interface designed to execute commands and operate within a basic shell environment. The shell provides users with an interactive way to interact with the operating system, allowing for the execution of programs and system commands. The "simple_shell" implements a set of essential shell functionalities, including command execution, path handling, input processing, and string manipulation.
 
 Upon startup, \fBsimple_shell\fR displays a command prompt for entering commands. It reads user inputs, processes them, and executes the corresponding commands. The shell also handles the search and execution of programs located in system paths or relative paths.
@@ -20,14 +30,15 @@ This shell is presented as a lightweight option to interact with the system and 
 
 .SH INVOCATION
 
-     When invoked without options or arguments, and if the standard input is connected to a terminal (or with the -i flag), \fBhsh\fR operates as an interactive
-     shell. It prompts before each command and handles errors differently. If argument 0 begins with a dash ‘-’, \fBhsh\fR is considered a login shell. It reads
-     commands from /etc/profile and .profile (if they exist) and, if set, from the file specified in the ENV environment variable. Users can customize login-time
-     and interactive shell commands in the .profile and ENV files.
+When invoked without options or arguments, and if the standard input is connected to a terminal (or with the -i flag), \fBhsh\fR operates as an interactive
+shell. It prompts before each command and handles errors differently. If argument 0 begins with a dash ‘-’, \fBhsh\fR is considered a login shell. It reads
+commands from /etc/profile and .profile (if they exist) and, if set, from the file specified in the ENV environment variable. Users can customize login-time
+and interactive shell commands in the .profile and ENV files.
 
-     When command line arguments are provided, the first argument becomes the name of a file for reading commands (shell script), and the rest are set as positional
-     parameters ($1, $2, etc). Otherwise, \fBhsh\fR reads commands from standard input.
+When command line arguments are provided, the first argument becomes the name of a file for reading commands (shell script), and the rest are set as positional
+parameters ($1, $2, etc). Otherwise, \fBhsh\fR reads commands from standard input.
 
 .SH AUTHOR
+
 Jesenia Bernal Mogollom <6935@holbertonstudents.com>
 Nataly Cristina Rodriguez Rojas <6925@holbertonstudents.com>
