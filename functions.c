@@ -34,16 +34,13 @@ int execute_func(void)
 	if (len_input > 0)
 	{
 		tokenizeInput(input, args, " ");
-		if (input[0] == '/' || input[0] == '.')
+		flag_exec = get_full_path(args[0], full_path);
+		if (flag_exec == 0)
 		{
-			strcpy(full_path, args[0]);
-			flag_exec = 1;
+			free(full_path);
+			free(input);
+			exit(127);
 		}
-		else
-			flag_exec = get_full_path(args[0], full_path);
-	}
-	if (flag_exec == 1 && access(full_path, X_OK) == 0)
-	{
 		pid = fork();
 		if (pid < 0)
 			perror("Error al crear el proceso hijo");
@@ -51,12 +48,6 @@ int execute_func(void)
 			execve(full_path, args, NULL);
 		else
 			waitpid(pid, NULL, 0);
-	}
-	else
-	{
-		free(full_path);
-		free(input);
-		exit(127);
 	}
 	free(full_path);
 	free(input);
@@ -117,6 +108,15 @@ int get_full_path(const char *command, char *full_path)
 	char *path_copy = strdup(path);
 	char *auxpath = NULL;
 
+	if (command[0] == '/' || command[0] == '.')
+	{
+		strcpy(full_path, command);
+		if (access(full_path, X_OK) == 0)
+		{
+			free(path_copy);
+			return (1);
+		}
+	}
 	if (path_copy == NULL)
 	{
 		perror("Error getting PATH");
