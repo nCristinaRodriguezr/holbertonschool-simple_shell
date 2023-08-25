@@ -105,7 +105,7 @@ void tokenizeInput(char *input, char **args, char *delimiter)
 int get_full_path(const char *command, char *full_path)
 {
 	char *path = getenv("PATH");
-	char *path_copy = strdup(path);
+	char *path_copy = NULL;
 	char *auxpath = NULL;
 
 	if (command[0] == '/' || command[0] == '.')
@@ -119,12 +119,12 @@ int get_full_path(const char *command, char *full_path)
 	}
 	else
 	{
-		if (path_copy == NULL)
+		if (path == NULL)
 		{
-			free(path_copy);
 			perror("Error getting PATH");
 			return (0);
 		}
+		path_copy = strdup(path);
 		auxpath = strtok(path_copy, ":");
 		while (auxpath != NULL)
 		{
