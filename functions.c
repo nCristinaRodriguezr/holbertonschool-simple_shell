@@ -11,7 +11,7 @@
   * execute_func- Esta funcion maneja toda la ejecucion del comando
   * Return: Devuelve cero si getline falla
   */
-int execute_func()
+int execute_func(void)
 {
 	char *input = NULL;
 	size_t len = 0;
@@ -30,9 +30,9 @@ int execute_func()
 	if (len_input > 0)
 	{
 		tokenizeInput(input, args, " ");
-		if (input[0] == '/' || input[0] == ',')
+		if (input[0] == '/' || input[0] == '.')
 		{
-			strcpy (full_path, args[0]);
+			strcpy(full_path, args[0]);
 			flag_exec = 1;
 		}
 		else
