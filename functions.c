@@ -45,7 +45,7 @@ int execute_func(void)
 		if (pid < 0)
 			perror("Error al crear el proceso hijo");
 		else if (pid == 0 && len_input > 0)
-			execve(full_path, args, NULL);
+			execve(full_path, args, environ);
 		else
 			waitpid(pid, NULL, 0);
 	}
@@ -117,22 +117,25 @@ int get_full_path(const char *command, char *full_path)
 			return (1);
 		}
 	}
-	if (path_copy == NULL)
+	else
 	{
-		free(path_copy);
-		perror("Error getting PATH");
-		return (0);
-	}
-	auxpath = strtok(path_copy, ":");
-	while (auxpath != NULL)
-	{
-		snprintf(full_path, MAX_PATH_LENGTH, "%s/%s", auxpath, command);
-		if (access(full_path, X_OK) == 0)
+		if (path_copy == NULL)
 		{
 			free(path_copy);
-			return (1);
+			perror("Error getting PATH");
+			return (0);
 		}
-		auxpath = strtok(NULL, ":");
+		auxpath = strtok(path_copy, ":");
+		while (auxpath != NULL)
+		{
+			snprintf(full_path, MAX_PATH_LENGTH, "%s/%s", auxpath, command);
+			if (access(full_path, X_OK) == 0)
+			{
+				free(path_copy);
+				return (1);
+			}
+			auxpath = strtok(NULL, ":");
+		}
 	}
 	free(path_copy);
 	fprintf(stderr, "./hsh: 1: %s: not found\n", command);
