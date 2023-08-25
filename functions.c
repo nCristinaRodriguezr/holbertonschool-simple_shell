@@ -121,9 +121,11 @@ int get_full_path(const char *command, char *full_path)
 		snprintf(full_path, MAX_PATH_LENGTH, "%s/%s", auxpath, command);
 		if (access(full_path, X_OK) == 0)
 		{
+			free(path_copy);
 			return (1);
 		}
 		auxpath = strtok(NULL, ":");
 	}
+	free(path_copy);
 	return (0);
 }
