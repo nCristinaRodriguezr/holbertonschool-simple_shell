@@ -54,8 +54,8 @@ The `functions.c` file contains implementations of the functions declared in `ma
 
 ## AUTHORS
 
-**Jesenia Bernal Mogollom** <6935@holbertonstudents.com>
-**Nataly Cristina Rodriguez Rojas** <6925@holbertonstudents.com>
+ - **Nataly Cristina Rodriguez Rojas** <6925@holbertonstudents.com>
+ - **Jesenia Bernal Mogollom** <6935@holbertonstudents.com>
 
 # Flowchar
 [flowchar simple shell](https://drive.google.com/file/d/1C3Qgq55CL5VPchin7JezLFs2MvH1TlOZ/view?usp=sharing)
