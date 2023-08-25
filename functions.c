@@ -6,22 +6,52 @@
 #include <string.h>
 #include "main.h"
 #define MAX_PATH_LENGTH 1024
+#define MAX_INPUT_SIZE 1024
 /**
-  * exec_token- esta función tokeniza una entrada de usuario y
-  * ejecuta el comando
-  * @args: argumentos del comando
-  * @full_path: Ruta al archivo para ejecutar el comando
+  * execute_func- Esta funcion maneja toda la ejecucion del comando
+  * Return: Devuelve cero si getline falla
   */
-void exec_token(char **args, char *full_path)
+int execute_func(void)
 {
-	if (args[0] != NULL)
+	char *input = NULL;
+	size_t len = 0;
+	ssize_t read;
+	pid_t pid;
+	int len_input = 0;
+	char *args[MAX_INPUT_SIZE];
+	char *full_path = (char *)malloc(MAX_INPUT_SIZE * sizeof(char));
+	int flag_exec = 0;
+
+	read = getline(&input, &len, stdin);
+	if (read == -1)
 	{
-		execve(full_path, args, NULL);
+		free(input);
+		free(full_path);
+		return (0);
 	}
-	else
+	strtrim(input);
+	len_input = strlen(input);
+	if (len_input > 0)
 	{
-		perror("Error al ejecutar el comando");
+		tokenizeInput(input, args, " ");
+		flag_exec = get_full_path(args[0], full_path);
+		if (flag_exec == 0)
+		{
+			free(full_path);
+			free(input);
+			exit(127);
+		}
+		pid = fork();
+		if (pid < 0)
+			perror("Error al crear el proceso hijo");
+		else if (pid == 0 && len_input > 0)
+			execve(full_path, args, environ);
+		else
+			waitpid(pid, NULL, 0);
 	}
+	free(full_path);
+	free(input);
+	return (1);
 }
 /**
   * strtrim- Esta funcion quita los espacios atras y adelante
@@ -75,23 +105,38 @@ void tokenizeInput(char *input, char **args, char *delimiter)
 int get_full_path(const char *command, char *full_path)
 {
 	char *path = getenv("PATH");
-	char *path_copy = strdup(path);
+	char *path_copy = NULL;
 	char *auxpath = NULL;
 
-	if (path_copy == NULL)
+	if (command[0] == '/' || command[0] == '.')
 	{
-		perror("Error getting PATH");
-	}
-	auxpath = strtok(path_copy, ":");
-	while (auxpath != NULL)
-	{
-		snprintf(full_path, MAX_PATH_LENGTH, "%s/%s", auxpath, command);
+		strcpy(full_path, command);
 		if (access(full_path, X_OK) == 0)
 		{
 			return (1);
 		}
-		auxpath = strtok(NULL, ":");
 	}
-	perror("Error PATH No ejecutable");
+	else
+	{
+		if (path == NULL)
+		{
+			fprintf(stderr, "./hsh: 1: %s: not found\n", command);
+			return (0);
+		}
+		path_copy = strdup(path);
+		auxpath = strtok(path_copy, ":");
+		while (auxpath != NULL)
+		{
+			snprintf(full_path, MAX_PATH_LENGTH, "%s/%s", auxpath, command);
+			if (access(full_path, X_OK) == 0)
+			{
+				free(path_copy);
+				return (1);
+			}
+			auxpath = strtok(NULL, ":");
+		}
+	}
+	free(path_copy);
+	fprintf(stderr, "./hsh: 1: %s: not found\n", command);
 	return (0);
 }
