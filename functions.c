@@ -24,7 +24,11 @@ int execute_func(void)
 
 	read = getline(&input, &len, stdin);
 	if (read == -1)
+	{
+		free(input);
+		free(full_path);
 		return (0);
+	}
 	strtrim(input);
 	len_input = strlen(input);
 	if (len_input > 0)
@@ -48,7 +52,6 @@ int execute_func(void)
 		else
 			waitpid(pid, NULL, 0);
 	}
-	flag_exec = 0;
 	free(full_path);
 	free(input);
 	return (1);
